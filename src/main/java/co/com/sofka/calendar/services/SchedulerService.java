@@ -6,6 +6,7 @@ import co.com.sofka.calendar.repositories.ProgramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,7 +36,8 @@ public class SchedulerService {
         var program = programRepository.findById(programId);
         return program
                 .flatMapMany(programa -> Flux.fromStream(getDurationOf(programa)))
-                .map(toProgramDate(startDate, endDate, pivot[0], index));
+                .map(toProgramDate(startDate, endDate, pivot[0], index))
+                .switchIfEmpty(Mono.error(new RuntimeException("Objeto vacío!")));
     }
 
     //No tocar
