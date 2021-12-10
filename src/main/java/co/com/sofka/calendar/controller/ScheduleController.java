@@ -17,10 +17,10 @@ public class ScheduleController {
     @Autowired
     SchedulerService schedulerService;
 
-    @GetMapping("/generate/{date}_{id}")
+    @GetMapping("/generate/{date}/{id}")
     public Flux<ProgramDate> generateCalendar(@PathVariable("date") String date, @PathVariable("id") String id){
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         //Se convierte el string a LocalDate
         LocalDate localDate = LocalDate.parse(date, formatter);
