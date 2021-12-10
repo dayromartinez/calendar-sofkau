@@ -37,7 +37,7 @@ public class SchedulerService {
         return program
                 .flatMapMany(programa -> Flux.fromStream(getDurationOf(programa)))
                 .map(toProgramDate(startDate, endDate, pivot[0], index))
-                .switchIfEmpty(Mono.error(new RuntimeException("Objeto vacío!")));
+                .switchIfEmpty(Mono.error(new RuntimeException("Objeto vacio!")));
     }
 
     //No tocar
